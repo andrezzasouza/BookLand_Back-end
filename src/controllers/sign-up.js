@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import connection from '../database/database.js';
 import { signUpSchema } from '../validations/bodyValidations.js';
 
-const selectUsers = 'SELECT * FROM users';
+const selectUsers = 'SELECT * FROM "Users"';
 const passwordRules = 'Your password must contain at least 8 characters, 1 upper case letter, 1 lower case letter, 1 number and 1 special character.';
 const CPFRules = 'Your CPF must only contain 11 numbers';
 
@@ -40,7 +40,7 @@ async function signUp(req, res) {
     const hashedPassword = bcrypt.hashSync(password, 11);
     await connection.query(
       `
-        INSERT INTO users
+        INSERT INTO "Users"
         (name, email, password, CPF)
         VALUES ($1, $2, $3, $4);
       `,
@@ -52,7 +52,7 @@ async function signUp(req, res) {
 
     await connection.query(
       `
-        INSERT INTO carts
+        INSERT INTO "Carts"
         ("user_id")
         VALUES ($1);
       `,
