@@ -6,6 +6,8 @@ const { Pool } = pg;
 
 let databaseConfig;
 
+console.log(process.env);
+
 if (process.env.NODE_ENV === 'production') {
   databaseConfig = {
     connectionString: process.env.DATABASE_URL,

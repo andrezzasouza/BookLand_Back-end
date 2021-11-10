@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
 import connection from '../database/database.js';
 
@@ -10,7 +11,7 @@ async function signUp(req, res) {
     await connection.query(`
         SELECT * FROM "Users"
     `);
-    res.send(testing);
+    res.send(process.env);
   } catch (err) {
     // eslint-disable-next-line no-console
     console.log(err);
