@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const connection = new Pool(databaseConfig);
-
+console.log(databaseConfig);
 console.log('Using database:', process.env.DB_DATABASE);
 
 export default connection;

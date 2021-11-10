@@ -1,10 +1,10 @@
+import '../src/setup.js';
 import faker from 'faker';
 import { generate as generateCPF } from 'gerador-validador-cpf';
 import bcrypt from 'bcrypt';
 import supertest from 'supertest';
 import app from '../src/app.js';
 import connection from '../src/database/database.js';
-import '../src/setup.js';
 
 beforeEach(async () => {
   await connection.query('DELETE FROM "Users"');
