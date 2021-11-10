@@ -3,15 +3,14 @@ import connection from '../database/database.js';
 
 async function signUp(req, res) {
   const {
-    name, email, password, CPF,
+    testing,
   } = req.body;
 
   try {
     await connection.query(`
-        SELECT * FROM users
+        SELECT * FROM "Users"
     `);
-    res.send(name, email, password, CPF);
-    res.sendStatus(201);
+    res.send(testing);
   } catch (err) {
     // eslint-disable-next-line no-console
     console.log(err);
