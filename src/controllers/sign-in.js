@@ -2,20 +2,20 @@
 import bcrypt from 'bcrypt';
 import { v4 as uuid } from 'uuid';
 import connection from '../database/database.js';
-// import { signInSchema } from '../validations/bodyValidations.js';
+import { signInSchema } from '../validations/bodyValidations.js';
 
 const selectUser = 'SELECT * FROM "Users" WHERE email = $1';
-// const passwordRules = 'Your password must contain at least 8 characters, 1 upper case letter, 1 lower case letter, 1 number and 1 special character.';
+const passwordRules = 'Your password must contain at least 8 characters, 1 upper case letter, 1 lower case letter, 1 number and 1 special character.';
 const incorrectInputMessage = 'Email or password is invalid!';
 
 async function signIn(req, res) {
-//   const isCorrectBody = signInSchema.validate(req.body);
-//   if (isCorrectBody.error) {
-//     if (isCorrectBody.error.details[0].path[0] === 'password') {
-//       return res.status(400).send(passwordRules);
-//     }
-//     return res.status(400).send(isCorrectBody.error.details[0].message);
-//   }
+  const isCorrectBody = signInSchema.validate(req.body);
+  if (isCorrectBody.error) {
+    if (isCorrectBody.error.details[0].path[0] === 'password') {
+      return res.status(400).send(passwordRules);
+    }
+    return res.status(400).send(isCorrectBody.error.details[0].message);
+  }
 
   const {
     email,
