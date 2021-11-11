@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable max-len */
 import bcrypt from 'bcrypt';
 import { v4 as uuid } from 'uuid';
@@ -52,7 +53,6 @@ async function signIn(req, res) {
     console.log(err);
     res.sendStatus(500);
   }
-  return 0;
 }
 
 export default signIn;
