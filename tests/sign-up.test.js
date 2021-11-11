@@ -1,13 +1,12 @@
 import '../src/setup.js';
 import supertest from 'supertest';
 import { user, createUser } from './factories/userFactory.js';
-import deleteTable from './factories/tableFactory.js';
+import clearDatabase from './factories/tableFactory.js';
 import app from '../src/app.js';
 import connection from '../src/database/database.js';
 
 beforeEach(async () => {
-  await deleteTable('Carts');
-  await deleteTable('Users');
+  await clearDatabase();
 });
 
 afterAll(() => {
