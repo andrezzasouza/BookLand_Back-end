@@ -7,8 +7,8 @@ import app from '../src/app.js';
 import connection from '../src/database/database.js';
 
 beforeEach(async () => {
-  await connection.query('DELETE FROM "Users"');
   await connection.query('DELETE FROM "Carts"');
+  await connection.query('DELETE FROM "Users"');
 });
 
 afterAll(() => {
