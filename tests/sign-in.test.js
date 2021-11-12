@@ -1,50 +1,9 @@
 import '../src/setup.js';
 import supertest from 'supertest';
-import bcrypt from 'bcrypt';
-import faker from 'faker';
-import { generate as generateCPF } from 'gerador-validador-cpf';
 import connection from '../src/database/database.js';
 import app from '../src/app.js';
-
-const user = {
-  name: faker.name.findName(),
-  email: faker.internet.email(),
-  CPF: generateCPF(),
-  password: 'Bookland123@',
-};
-
-const createUser = async (name, email, CPF, password) => {
-  const hashedPassword = bcrypt.hashSync(password, 10);
-  await connection.query(
-    `
-          INSERT INTO "Users"
-          (name, email, password, CPF)
-          VALUES ($1, $2, $3, $4);
-      `,
-    [name, email, hashedPassword, CPF],
-  );
-};
-
-const del = 'DELETE FROM';
-
-const clearDatabase = async () => {
-  await connection.query(`
-    ${del} "Networks";
-    ${del} "Category_groups";
-    ${del} "States";
-    ${del} "Cities";
-    ${del} "Cart_books";
-    ${del} "Carts";
-    ${del} "Sessions";
-    ${del} "Categories";
-    ${del} "Payments";
-    ${del} "Closed_deals";
-    ${del} "Books_categories";
-    ${del} "Addresses";
-    ${del} "Books";
-    ${del} "Users";
-  `);
-};
+import clearDatabase from './factories/tableFactory.js';
+import { user, createUser } from './factories/userFactory.js';
 
 beforeEach(async () => {
   await clearDatabase();
