@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
-import signUp from './controllers/signUp.js';
 import home from './controllers/home.js';
+import signUp from './controllers/sign-up.js';
 
 const app = express();
 app.use(cors());
