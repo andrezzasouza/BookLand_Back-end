@@ -1,18 +1,24 @@
 import connection from '../database/database.js';
 
+// eslint-disable-next-line consistent-return
 async function home(req, res) {
-  // return res.send(process.env);
   try {
-    const result = await connection.query(`
-      SELECT * FROM "Books"
-    `);
+    const result = await connection.query(
+      `
+       SELECT * FROM "Books";
+      `,
+    );
+    // eslint-disable-next-line no-console
+    console.log('1');
 
     if (result.rowCount === 0) {
       return res.sendStatus(204);
     }
-    return res.status(200).send(result.rows);
+    res.status(200).send(result.rows);
   } catch (err) {
-    return res.sendStatus(500);
+    // eslint-disable-next-line no-console
+    console.log(err);
+    res.sendStatus(500);
   }
 }
 
