@@ -138,24 +138,13 @@ ALTER TABLE "Categories" ADD CONSTRAINT "Categories_fk0" FOREIGN KEY ("category_
 ALTER TABLE "Addresses" ADD CONSTRAINT "Addresses_fk0" FOREIGN KEY ("user_id") REFERENCES "Users"("id");
 ALTER TABLE "Addresses" ADD CONSTRAINT "Addresses_fk1" FOREIGN KEY ("state_id") REFERENCES "States"("id");
 ALTER TABLE "Addresses" ADD CONSTRAINT "Addresses_fk2" FOREIGN KEY ("city_id") REFERENCES "Cities"("id");
-​ALTER TABLE "Carts" ADD CONSTRAINT "Carts_fk0" FOREIGN KEY ("user_id") REFERENCES "Users"("id");
-​ALTER TABLE "Cart_books" ADD CONSTRAINT "Cart_books_fk0" FOREIGN KEY ("book_id") REFERENCES "Books"("id");
+ALTER TABLE "Carts" ADD CONSTRAINT "Carts_fk0" FOREIGN KEY ("user_id") REFERENCES "Users"("id");
+ALTER TABLE "Cart_books" ADD CONSTRAINT "Cart_books_fk0" FOREIGN KEY ("book_id") REFERENCES "Books"("id");
 ALTER TABLE "Cart_books" ADD CONSTRAINT "Cart_books_fk1" FOREIGN KEY ("cart_id") REFERENCES "Carts"("id");
-​ALTER TABLE "Payments" ADD CONSTRAINT "Payments_fk0" FOREIGN KEY ("user_id") REFERENCES "Users"("id");
+ALTER TABLE "Payments" ADD CONSTRAINT "Payments_fk0" FOREIGN KEY ("user_id") REFERENCES "Users"("id");
 ALTER TABLE "Payments" ADD CONSTRAINT "Payments_fk1" FOREIGN KEY ("network_id") REFERENCES "Networks"("id");
-​ALTER TABLE "Closed_deals" ADD CONSTRAINT "Closed_deals_fk0" FOREIGN KEY ("user_id") REFERENCES "Users"("id");
+ALTER TABLE "Closed_deals" ADD CONSTRAINT "Closed_deals_fk0" FOREIGN KEY ("user_id") REFERENCES "Users"("id");
 ALTER TABLE "Closed_deals" ADD CONSTRAINT "Closed_deals_fk1" FOREIGN KEY ("book_id") REFERENCES "Books"("id");
 ALTER TABLE "Sessions" ADD CONSTRAINT "Sessions_fk0" FOREIGN KEY ("user_id") REFERENCES "Users"("id");
 ALTER TABLE "Books" ADD CONSTRAINT "Books_fk0" FOREIGN KEY ("author_id") REFERENCES "Authors"("id");
 ​
--- CREATE TABLE "Ratings" (
--- 	"id" serial NOT NULL,
--- 	"rating" integer NOT NULL,
--- 	"user_id" integer NOT NULL,
--- 	"book_id" integer NOT NULL,
--- 	CONSTRAINT "Ratings_pk" PRIMARY KEY ("id")
--- ) WITH (
---   OIDS=FALSE
--- );
--- ALTER TABLE "Ratings" ADD CONSTRAINT "Ratings_fk0" FOREIGN KEY ("user_id") REFERENCES "Users"("id");
--- ALTER TABLE "Ratings" ADD CONSTRAINT "Ratings_fk1" FOREIGN KEY ("book_id") REFERENCES "Books"("id");
