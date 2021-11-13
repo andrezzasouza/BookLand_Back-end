@@ -18,6 +18,7 @@ const clearDatabase = async () => {
     ${del} "Addresses";
     ${del} "Books";
     ${del} "Users";
+    ${del} "Authors";
   `);
 };
 
