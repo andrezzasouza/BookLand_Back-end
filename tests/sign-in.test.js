@@ -33,7 +33,7 @@ describe('POST /sign-in', () => {
     expect(result.status).toEqual(404);
   });
 
-  it('returns 404 for wrong password', async () => {
+  it('returns 401 for wrong password', async () => {
     await createUser(user.name, user.email, user.CPF, user.password);
 
     const result = await supertest(app)
@@ -42,7 +42,7 @@ describe('POST /sign-in', () => {
         email: user.email,
         password: 'NotBookland123@',
       });
-    expect(result.status).toEqual(404);
+    expect(result.status).toEqual(401);
   });
 
   it('returns 200 for sign-in sucess', async () => {

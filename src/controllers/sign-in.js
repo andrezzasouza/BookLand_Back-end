@@ -37,7 +37,7 @@ async function signIn(req, res) {
     } = usersTable.rows[0];
 
     if (!bcrypt.compareSync(receivedPassword, password)) {
-      return res.status(404).send(incorrectInputMessage);
+      return res.status(401).send(incorrectInputMessage);
     }
 
     const token = uuid();
