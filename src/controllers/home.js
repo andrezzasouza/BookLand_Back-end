@@ -5,12 +5,9 @@ async function home(req, res) {
   try {
     const result = await connection.query(
       `
-       SELECT * FROM "Books";
+       SELECT * FROM "Books" WHERE quantity > 0;
       `,
     );
-    // eslint-disable-next-line no-console
-    console.log('1');
-
     if (result.rowCount === 0) {
       return res.sendStatus(204);
     }
