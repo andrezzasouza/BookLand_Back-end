@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable dot-notation */
 import connection from '../database/database.js';
 
@@ -41,7 +42,8 @@ async function deleteCartProduct(req, res) {
   const token = req.headers['authorization']?.replace('Bearer ', '');
   if (!token) return res.status(401).send('You are not authorized to see this content. Please try signing in.');
 
-  const { bookId } = req.body;
+  const { data } = req.body;
+  const { bookId } = data;
 
   try {
     const obtainCartId = await connection.query(`
