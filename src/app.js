@@ -13,6 +13,6 @@ app.post('/sign-up', signUp);
 app.post('/sign-in', signIn);
 app.get('/home', home);
 app.get('/cart-products', getCartProducts);
-app.delete('/cart-products', deleteCartProduct);
+app.post('/cart-products', deleteCartProduct);
 
 export default app;

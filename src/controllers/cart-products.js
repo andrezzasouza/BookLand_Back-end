@@ -42,8 +42,7 @@ async function deleteCartProduct(req, res) {
   const token = req.headers['authorization']?.replace('Bearer ', '');
   if (!token) return res.status(401).send('You are not authorized to see this content. Please try signing in.');
 
-  const { data } = req.body;
-  const { bookId } = data;
+  const { bookId } = req.body;
 
   try {
     const obtainCartId = await connection.query(`
