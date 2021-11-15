@@ -1,9 +1,16 @@
 /* eslint-disable no-console */
 import connection from '../database/database.js';
+import { deliverySchema } from '../validations/bodyValidations.js';
 
 async function postDeliveryInfo(req, res) {
   const token = req.headers.authorization?.replace('Bearer ', '');
   if (!token) return res.status(401).send('You are not authorized to see this content. Please try signing in.');
+
+  const isCorrectBody = deliverySchema.validate(req.body);
+  if (isCorrectBody.error) {
+    return res.status(400).send(isCorrectBody.error.details[0].message);
+  }
+
   const {
     state,
     city,

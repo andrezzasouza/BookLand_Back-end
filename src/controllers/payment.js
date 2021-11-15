@@ -1,11 +1,18 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 import connection from '../database/database.js';
+import { paymentSchema } from '../validations/bodyValidations.js';
 
 async function postPaymentInfo(req, res) {
   console.log('oi');
   const token = req.headers.authorization?.replace('Bearer ', '');
   if (!token) return res.status(401).send('You are not authorized to see this content. Please try signing in.');
+
+  const isCorrectBody = paymentSchema.validate(req.body);
+  if (isCorrectBody.error) {
+    return res.status(400).send(isCorrectBody.error.details[0].message);
+  }
+
   const {
     network,
     cardName,
