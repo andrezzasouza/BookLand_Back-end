@@ -20,6 +20,8 @@ CREATE TABLE "Books" (
 	"video" TEXT,
 	"quantity" integer NOT NULL,
 	"author_id" integer NOT NULL,
+	"publisher" varchar(255) NOT NULL,
+	"pages" integer NOT NULL,
 	CONSTRAINT "Books_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -65,6 +67,7 @@ CREATE TABLE "Cart_books" (
 	"id" serial NOT NULL,
 	"book_id" integer NOT NULL,
 	"cart_id" integer NOT NULL,
+	"book_quantity" integer NOT NULL DEFAULT 1,
 	CONSTRAINT "Cart_books_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -84,15 +87,6 @@ CREATE TABLE "Payments" (
 	"expiration_date" varchar(5) NOT NULL,
 	"network" varchar(255) NOT NULL,
 	CONSTRAINT "Payments_pk" PRIMARY KEY ("id")
-) WITH (
-  OIDS=FALSE
-);
-CREATE TABLE "Closed_deals" (
-	"id" serial NOT NULL,
-	"user_id" integer NOT NULL,
-	"book_id" integer NOT NULL,
-	"purchase_date" DATE NOT NULL DEFAULT 'NOW()',
-	CONSTRAINT "Closed_deals_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
@@ -119,8 +113,6 @@ ALTER TABLE "Carts" ADD CONSTRAINT "Carts_fk0" FOREIGN KEY ("user_id") REFERENCE
 ALTER TABLE "Cart_books" ADD CONSTRAINT "Cart_books_fk0" FOREIGN KEY ("book_id") REFERENCES "Books"("id");
 ALTER TABLE "Cart_books" ADD CONSTRAINT "Cart_books_fk1" FOREIGN KEY ("cart_id") REFERENCES "Carts"("id");
 ALTER TABLE "Payments" ADD CONSTRAINT "Payments_fk0" FOREIGN KEY ("user_id") REFERENCES "Users"("id");
-ALTER TABLE "Closed_deals" ADD CONSTRAINT "Closed_deals_fk0" FOREIGN KEY ("user_id") REFERENCES "Users"("id");
-ALTER TABLE "Closed_deals" ADD CONSTRAINT "Closed_deals_fk1" FOREIGN KEY ("book_id") REFERENCES "Books"("id");
 ALTER TABLE "Sessions" ADD CONSTRAINT "Sessions_fk0" FOREIGN KEY ("user_id") REFERENCES "Users"("id");
 ALTER TABLE "Books" ADD CONSTRAINT "Books_fk0" FOREIGN KEY ("author_id") REFERENCES "Authors"("id");
 ​
