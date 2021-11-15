@@ -21,7 +21,7 @@ async function getCartProducts(req, res) {
     const cartId = obtainCartId.rows[0].id;
 
     const obtainUserCartBooks = await connection.query(`
-        SELECT "Books".* FROM "Books" JOIN "Cart_books" ON "Cart_books".book_id = "Books".id WHERE "Cart_books".cart_id = $1;
+        SELECT "Books".*, "Cart_books".book_quantity FROM "Books" JOIN "Cart_books" ON "Cart_books".book_id = "Books".id WHERE "Cart_books".cart_id = $1;
     `, [cartId]);
 
     if (obtainUserCartBooks.rowCount === 0) {

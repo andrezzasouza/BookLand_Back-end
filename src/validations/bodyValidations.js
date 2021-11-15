@@ -47,6 +47,13 @@ const paymentSchema = Joi.object()
     CVV: Joi.string().pattern(stringWithOnlyNumbers).required(),
   });
 
+const cartQuantitySchema = Joi.object()
+  .length(2)
+  .keys({
+    bookId: Joi.number().integer().required(),
+    bookQuantity: Joi.number().integer().required(),
+  });
+
 export {
-  signUpSchema, signInSchema, deliverySchema, paymentSchema,
+  signUpSchema, signInSchema, deliverySchema, paymentSchema, cartQuantitySchema,
 };
