@@ -9,13 +9,6 @@ async function header(req, res) {
   const { authorization } = req.headers;
   const token = authorization?.replace('Bearer ', '');
 
-  // eslint-disable-next-line no-console
-  console.log(token);
-  // eslint-disable-next-line no-console
-  console.log(token.length);
-  // eslint-disable-next-line no-console
-  console.log(typeof token);
-
   if (!token) return res.status(401).send(notLoggedIn);
 
   const isCorrectToken = tokenSchema.validate(token);

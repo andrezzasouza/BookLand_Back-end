@@ -1,5 +1,6 @@
 import faker from 'faker';
 import connection from '../../src/database/database';
+import { user, createUser } from './userFactory';
 
 const createToken = {
   token: faker.datatype.uuid,
@@ -13,11 +14,12 @@ const badToken = {
 };
 
 const createSession = async (token) => {
+  createUser(user);
   await connection.query(
     `
       INSERT INTO "Sessions"
-      (token)
-      VALUES($1);
+      (user_id, token)
+      VALUES($1, $2);
     `,
     [token],
   );
