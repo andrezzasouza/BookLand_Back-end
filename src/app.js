@@ -6,7 +6,7 @@ import signUp from './controllers/sign-up.js';
 import { getCartProducts, deleteCartProduct } from './controllers/cart-products.js';
 import postDeliveryInfo from './controllers/delivery.js';
 import postPaymentInfo from './controllers/payment.js';
-import cartQuantity from './controllers/cart-quantity.js';
+import { cartQuantity, clearCart } from './controllers/cart-quantity.js';
 
 const app = express();
 app.use(cors());
@@ -20,5 +20,6 @@ app.post('/cart-products', deleteCartProduct);
 app.post('/delivery', postDeliveryInfo);
 app.post('/payment', postPaymentInfo);
 app.post('/cart-quantity', cartQuantity);
+app.delete('/cart-quantity', clearCart);
 
 export default app;
