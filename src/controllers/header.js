@@ -14,8 +14,6 @@ async function header(req, res) {
   const isCorrectToken = tokenSchema.validate(token);
 
   if (isCorrectToken.error) {
-    // eslint-disable-next-line no-console
-    console.log(isCorrectToken.error);
     return res.status(400).send(invalidData);
   }
 

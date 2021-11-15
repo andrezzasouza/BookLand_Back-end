@@ -1,28 +1,34 @@
-import faker from 'faker';
+import { v4 as uuid } from 'uuid';
 import connection from '../../src/database/database';
 import { user, createUser } from './userFactory';
 
-const createToken = {
-  token: faker.datatype.uuid,
-};
-
-// eslint-disable-next-line no-console
-console.log(createToken.token);
-
 const badToken = {
-  token: 123456,
+  token: '156_87*95',
 };
 
-const createSession = async (token) => {
-  createUser(user);
+const realToken = uuid();
+
+const token = uuid();
+
+const createSession = async () => {
+  await createUser(user.name, user.email, user.CPF, user.password);
+  const selectUser = 'SELECT * FROM "Users" WHERE email = $1';
+  const usersTable = await connection.query(selectUser, [user.email]);
+
+  const { id } = usersTable.rows[0];
+  const userId = id;
+
   await connection.query(
     `
-      INSERT INTO "Sessions"
-      (user_id, token)
-      VALUES($1, $2);
-    `,
-    [token],
+      INSERT INTO "Sessions" (user_id, token)
+      VALUES ($1, $2)
+    `, [userId, token],
   );
 };
 
-export { createToken, badToken, createSession };
+export {
+  realToken,
+  badToken,
+  createSession,
+  token,
+};
