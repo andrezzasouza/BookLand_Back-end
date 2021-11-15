@@ -67,4 +67,37 @@ async function postDeliveryInfo(req, res) {
   }
 }
 
-export default postDeliveryInfo;
+async function getDeliveryInfo(req, res) {
+  const token = req.headers.authorization?.replace('Bearer ', '');
+  if (!token) return res.status(401).send('You are not authorized to see this content. Please try signing in.');
+
+  try {
+    const obtainUserId = await connection.query(`
+        SELECT "Users".id FROM "Users" 
+        JOIN "Sessions" 
+            ON "Users".id = "Sessions".user_id 
+        WHERE "Sessions".token = $1;
+    `, [token]);
+
+    if (obtainUserId.rowCount === 0) {
+      return res.status(403).send('Your session token has expired or you haven`t logged in yet!');
+    }
+
+    const userId = obtainUserId.rows[0].id;
+
+    const addressTable = await connection.query(`
+        SELECT * FROM "Addresses" 
+        WHERE "user_id" = $1;
+    `, [userId]);
+
+    const userAdress = addressTable.rows[0];
+
+    return res.send(userAdress);
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log(err);
+    return res.sendStatus(500);
+  }
+}
+
+export { postDeliveryInfo, getDeliveryInfo };
