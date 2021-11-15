@@ -34,12 +34,12 @@ async function postDeliveryInfo(req, res) {
 
     const userId = obtainUserId.rows[0].id;
 
-    const checkIfAdressExists = await connection.query(`
+    const checkIfAddressExists = await connection.query(`
         SELECT * FROM "Addresses" 
         WHERE "user_id" = $1;
     `, [userId]);
 
-    if (checkIfAdressExists.rowCount === 0) {
+    if (checkIfAddressExists.rowCount === 0) {
       await connection.query(`
         INSERT INTO "Addresses" 
           ("user_id", state, city, district, street, cep, complement)
