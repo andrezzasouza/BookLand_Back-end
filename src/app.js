@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import header from './controllers/header.js';
 import home from './controllers/home.js';
 import signIn from './controllers/sign-in.js';
 import signUp from './controllers/sign-up.js';
@@ -23,5 +24,6 @@ app.post('/cart-quantity', cartQuantity);
 app.delete('/cart-quantity', clearCart);
 app.get('/delivery', getDeliveryInfo);
 app.get('/payment', getPaymentInfo);
+app.delete('/header', header);
 
 export default app;
