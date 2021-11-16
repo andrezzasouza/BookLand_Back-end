@@ -2,7 +2,7 @@ import connection from '../database/database.js';
 
 async function product(req, res) {
   const bookId = req.params.id;
-
+  const serverError = "It wasn't possible to access the server. Please, try again later!";
   try {
     const result = await connection.query(
       `
@@ -32,7 +32,7 @@ async function product(req, res) {
   } catch (err) {
     // eslint-disable-next-line no-console
     console.log(err);
-    return res.sendStatus(500);
+    return res.status(500).send(serverError);
   }
 }
 

@@ -4,7 +4,6 @@ import Joi from 'joi';
 const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 const stringWithOnlyNumbers = /^[0-9]+$/;
 const expirationDatePattern = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/;
-// eslint-disable-next-line no-useless-escape
 
 const signUpSchema = Joi.object()
   .length(4)
@@ -53,6 +52,16 @@ const cartQuantitySchema = Joi.object()
     bookQuantity: Joi.number().integer().required(),
   });
 
+const addToCartSchema = Joi.object()
+  .length(1)
+  .keys({
+    id: Joi.number()
+      .integer()
+      .positive()
+      .greater(0)
+      .required(),
+  });
+
 export {
-  signUpSchema, signInSchema, deliverySchema, paymentSchema, cartQuantitySchema,
+  signUpSchema, signInSchema, deliverySchema, paymentSchema, cartQuantitySchema, addToCartSchema,
 };
