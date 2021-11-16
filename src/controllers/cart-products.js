@@ -10,7 +10,7 @@ async function getCartProducts(req, res) {
     const obtainCartId = await connection.query(`
         SELECT "Carts".id FROM "Carts" 
         JOIN "Sessions" 
-            ON "Carts".user_id = "Sessions".user_id 
+          ON "Carts".user_id = "Sessions".user_id 
         WHERE "Sessions".token = $1;
     `, [token]);
 

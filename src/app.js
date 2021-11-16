@@ -5,6 +5,7 @@ import home from './controllers/home.js';
 import signIn from './controllers/sign-in.js';
 import signUp from './controllers/sign-up.js';
 import product from './controllers/product.js';
+import addToCart from './controllers/add-to-cart.js';
 import { getCartProducts, deleteCartProduct } from './controllers/cart-products.js';
 import { postDeliveryInfo, getDeliveryInfo } from './controllers/delivery.js';
 import { postPaymentInfo, getPaymentInfo } from './controllers/payment.js';
@@ -27,5 +28,6 @@ app.delete('/cart-quantity', clearCart);
 app.get('/delivery', getDeliveryInfo);
 app.get('/payment', getPaymentInfo);
 app.delete('/header', header);
+app.post('/add-to-cart', addToCart);
 
 export default app;
