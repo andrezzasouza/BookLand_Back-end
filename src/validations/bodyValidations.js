@@ -27,7 +27,6 @@ const signInSchema = Joi.object()
   });
 
 const deliverySchema = Joi.object()
-  .length(6)
   .keys({
     state: Joi.string().required(),
     city: Joi.string().required(),
