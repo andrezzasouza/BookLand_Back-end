@@ -6,7 +6,10 @@ async function product(req, res) {
   try {
     const result = await connection.query(
       `
-        SELECT * FROM "Books" 
+        SELECT
+          "Books".*, "Categories".name AS genre_name, "Category_groups".name AS category_name
+        FROM 
+          "Books" 
         JOIN
           "Authors" ON "Authors".id = "Books".author_id
         JOIN
@@ -21,13 +24,11 @@ async function product(req, res) {
       [bookId],
     );
 
-    // differentiate between book name and author name, don't get author id
-
     if (result.rowCount === 0) {
       return res.status(404).send("Sorry, we couldn't find this book.");
     }
 
-    return res.status(200).send(result.rows[0]);
+    return res.status(200).send(result.rows);
   } catch (err) {
     // eslint-disable-next-line no-console
     console.log(err);
