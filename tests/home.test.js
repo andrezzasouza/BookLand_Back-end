@@ -26,6 +26,8 @@ describe('GET /home', () => {
       books.price,
       books.image,
       books.quantity,
+      books.publisher,
+      books.pages,
       author.name,
     );
     const result = await supertest(app).get('/home');

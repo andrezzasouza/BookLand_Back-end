@@ -13,9 +13,13 @@ const books = {
   price: faker.datatype.number(),
   image: faker.image.imageUrl(),
   quantity: faker.datatype.number(),
+  publisher: faker.company.companyName(),
+  pages: faker.datatype.number(),
 };
 
-const addBooks = async (name, description, price, image, quantity, authorName) => {
+const addBooks = async (
+  name, description, price, image, quantity, publisher, pages, authorName
+) => {
   await connection.query(
     `
     INSERT INTO "Authors"
@@ -35,10 +39,10 @@ const addBooks = async (name, description, price, image, quantity, authorName) =
   await connection.query(
     `
     INSERT INTO "Books"
-    (name, description, price, image, quantity, author_id)
-    VALUES($1, $2, $3, $4, $5, $6);
+    (name, description, price, image, quantity, author_id, publisher, pages)
+    VALUES($1, $2, $3, $4, $5, $6, $7, $8);
     `,
-    [name, description, price, image, quantity, result.rows[0].id],
+    [name, description, price, image, quantity, result.rows[0].id, publisher, pages],
   );
 };
 

@@ -67,6 +67,7 @@ CREATE TABLE "Cart_books" (
 	"id" serial NOT NULL,
 	"book_id" integer NOT NULL,
 	"cart_id" integer NOT NULL,
+	"book_quantity" integer NOT NULL DEFAULT 1,
 	CONSTRAINT "Cart_books_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
