@@ -7,7 +7,7 @@ async function product(req, res) {
     const result = await connection.query(
       `
         SELECT
-          "Books".*, "Categories".name AS genre_name, "Category_groups".name AS category_name
+          "Books".*, "Authors".name AS author, "Categories".name AS genre_name, "Category_groups".name AS category_name
         FROM 
           "Books" 
         JOIN
