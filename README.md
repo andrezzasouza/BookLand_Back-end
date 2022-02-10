@@ -30,6 +30,7 @@ Main thechnologies used in the construction of the project:<br>
   <img src="https://img.shields.io/badge/-PostgreSQL-red?style=for-the-badge" />
   <img src="https://img.shields.io/badge/-Jest-red?style=for-the-badge" />
 </p>
+
 ## How to run
 
 1. Create a root project folder named BookLand
